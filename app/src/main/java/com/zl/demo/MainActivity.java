@@ -9,6 +9,7 @@ import com.zl.netlib.CronetUrlRequestCallback;
 
 import org.chromium.net.CronetEngine;
 import org.chromium.net.UrlRequest;
+import org.chromium.net.UrlResponseInfo;
 
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -24,7 +25,22 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.btn_send).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                UrlRequest.Builder requestBuilder = mCronetEngine.newUrlRequestBuilder("https://ssl.gstatic.com/gb/images/qi2_00ed8ca1.png", new CronetUrlRequestCallback(), mExecutor);
+                UrlRequest.Builder requestBuilder = mCronetEngine.newUrlRequestBuilder("https://ssl.gstatic.com/gb/images/qi2_00ed8ca1.png", new CronetUrlRequestCallback() {
+                    @Override
+                    public void onSuccess(UrlRequest request, UrlResponseInfo info, byte[] bodyBytes, long latencyTime) {
+                        
+                    }
+
+                    @Override
+                    public void onFailed(UrlRequest request, UrlResponseInfo info, Exception error, long latencyTime) {
+
+                    }
+
+                    @Override
+                    public void onCanceled(UrlRequest request, UrlResponseInfo info, long latencyTime) {
+
+                    }
+                }, mExecutor);
                 UrlRequest request = requestBuilder.build();
                 request.start();
             }

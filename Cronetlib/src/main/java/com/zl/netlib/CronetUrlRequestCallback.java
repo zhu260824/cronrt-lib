@@ -90,7 +90,7 @@ public abstract class CronetUrlRequestCallback extends UrlRequest.Callback {
      * @param bodyBytes
      * @param latencyTime
      */
-    abstract void onSuccess(UrlRequest request, UrlResponseInfo info, byte[] bodyBytes, long latencyTime);
+    public abstract void onSuccess(UrlRequest request, UrlResponseInfo info, byte[] bodyBytes, long latencyTime);
 
     /**
      * 请求失败
@@ -100,7 +100,7 @@ public abstract class CronetUrlRequestCallback extends UrlRequest.Callback {
      * @param error
      * @param latencyTime
      */
-    abstract void onFailed(UrlRequest request, UrlResponseInfo info, Exception error, long latencyTime);
+    public abstract void onFailed(UrlRequest request, UrlResponseInfo info, Exception error, long latencyTime);
 
     /**
      * 请求取消
@@ -109,5 +109,5 @@ public abstract class CronetUrlRequestCallback extends UrlRequest.Callback {
      * @param info
      * @param latencyTime
      */
-    abstract void onCanceled(UrlRequest request, UrlResponseInfo info, long latencyTime);
+    public abstract void onCanceled(UrlRequest request, UrlResponseInfo info, long latencyTime);
 }
