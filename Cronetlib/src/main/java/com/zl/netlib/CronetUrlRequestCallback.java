@@ -18,20 +18,12 @@ import java.nio.channels.WritableByteChannel;
  * @Description TODO
  * @date 2023/01/04  10:45
  */
-public class CronetUrlRequestCallback extends UrlRequest.Callback {
+public abstract class CronetUrlRequestCallback extends UrlRequest.Callback {
     private final static String TAG = "Cronet";
     private static final int BYTE_BUFFER_CAPACITY_BYTES = 64 * 1024;
     private ByteArrayOutputStream bytesReceived = new ByteArrayOutputStream();
     private WritableByteChannel receiveChannel = Channels.newChannel(bytesReceived);
     private long startTime;
-    private CronetHttpCallBack httpCallBack;
-
-    public CronetUrlRequestCallback() {
-    }
-
-    public CronetUrlRequestCallback(CronetHttpCallBack httpCallBack) {
-        this.httpCallBack = httpCallBack;
-    }
 
     @Override
     public void onRedirectReceived(UrlRequest request, UrlResponseInfo info, String newLocationUrl) throws Exception {
@@ -53,7 +45,7 @@ public class CronetUrlRequestCallback extends UrlRequest.Callback {
         try {
             receiveChannel.write(byteBuffer);
         } catch (IOException e) {
-            android.util.Log.i(TAG, "IOException during ByteBuffer read. Details: ", e);
+            Log.i(TAG, "IOException during ByteBuffer read. Details: ", e);
         }
         byteBuffer.clear();
         request.read(byteBuffer);
@@ -63,41 +55,59 @@ public class CronetUrlRequestCallback extends UrlRequest.Callback {
     public void onSucceeded(UrlRequest request, UrlResponseInfo info) {
         Log.i(TAG, "onSucceeded method called.");
         long latencyTime = System.currentTimeMillis() - startTime;
-        Log.i(TAG,
-                "****** Cronet Request Completed, the latency is " + latencyTime + " nanoseconds" +
-                        ". " + getWasCachedMessage(info));
+        Log.i(TAG, "****** Cronet Request Completed, the latency is " + latencyTime + " nanoseconds" +
+                ". " + (info.wasCached() ? "The request was cached." : ""));
 
-        Log.i(TAG,
-                "****** Cronet Negotiated protocol:  " + info.getNegotiatedProtocol());
+        Log.i(TAG, "****** Cronet Negotiated protocol:  " + info.getNegotiatedProtocol());
 
-        Log.i(TAG,
-                "****** Cronet Request Completed, status code is " + info.getHttpStatusCode()
-                        + ", total received bytes is " + info.getReceivedByteCount());
-        byte[] bodyBytes = bytesReceived.toByteArray();
-        if (null!=httpCallBack){
-            httpCallBack.onSuccess(request,info,bodyBytes,latencyTime);
-        }
-    }
-
-    private static String getWasCachedMessage(UrlResponseInfo responseInfo) {
-        if (responseInfo.wasCached()) {
-            return "The request was cached.";
-        } else {
-            return "";
-        }
+        Log.i(TAG, "****** Cronet Request Completed, status code is " + info.getHttpStatusCode()
+                + ", total received bytes is " + info.getReceivedByteCount());
+        onSuccess(request, info, bytesReceived.toByteArray(), latencyTime);
     }
 
 
     @Override
     public void onFailed(UrlRequest request, UrlResponseInfo info, CronetException error) {
         Log.i(TAG, "onFailed method called.");
+        long latencyTime = System.currentTimeMillis() - startTime;
+        onFailed(request, info, error, latencyTime);
     }
 
     @Override
     public void onCanceled(UrlRequest request, UrlResponseInfo info) {
         super.onCanceled(request, info);
         Log.i(TAG, "onCanceled method called.");
+        long latencyTime = System.currentTimeMillis() - startTime;
+        onCanceled(request, info, latencyTime);
     }
 
 
+    /**
+     * 请求成功
+     *
+     * @param request
+     * @param info
+     * @param bodyBytes
+     * @param latencyTime
+     */
+    abstract void onSuccess(UrlRequest request, UrlResponseInfo info, byte[] bodyBytes, long latencyTime);
+
+    /**
+     * 请求失败
+     *
+     * @param request
+     * @param info
+     * @param error
+     * @param latencyTime
+     */
+    abstract void onFailed(UrlRequest request, UrlResponseInfo info, Exception error, long latencyTime);
+
+    /**
+     * 请求取消
+     *
+     * @param request
+     * @param info
+     * @param latencyTime
+     */
+    abstract void onCanceled(UrlRequest request, UrlResponseInfo info, long latencyTime);
 }
