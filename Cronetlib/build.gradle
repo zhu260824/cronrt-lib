@@ -59,4 +59,8 @@ dependencies {
     implementation group:'com.google.guava',name:'guava',version:'31.1-android'
     implementation group: 'androidx.annotation', name: 'annotation', version: '1.5.0'
 //    implementation group: 'org.chromium.net', name: 'cronet-api', version: '108.5359.79'
+//    implementation group: 'org.chromium.net', name: 'cronet-embedded', version: '108.5359.79'
+//    implementation group: 'org.chromium.net', name: 'cronet-common', version: '108.5359.79'
+//    implementation group: 'org.chromium.net', name: 'cronet-fallback', version: '108.5359.79'
+
 }
