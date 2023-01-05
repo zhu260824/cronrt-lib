@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
                 UrlRequest.Builder requestBuilder = mCronetEngine.newUrlRequestBuilder("https://ssl.gstatic.com/gb/images/qi2_00ed8ca1.png", new CronetUrlRequestCallback() {
                     @Override
                     public void onSuccess(UrlRequest request, UrlResponseInfo info, byte[] bodyBytes, long latencyTime) {
-                        
+
                     }
 
                     @Override
