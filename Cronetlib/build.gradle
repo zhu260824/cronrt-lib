@@ -14,9 +14,6 @@ android {
         versionName "1.0.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
-        ndk {
-            abiFilters("armeabi", "armeabi-v7a", "arm64-v8a", "x86", "x86_64")
-        }
     }
 
     compileOptions {
@@ -40,12 +37,12 @@ android {
 }
 
 dependencies {
-    implementation group:'com.squareup.okhttp3',name:'okhttp',version:'3.12.13'
-    implementation group:'com.squareup.okio',name:'okio',version:'2.10.0'
-    implementation group:'com.google.guava',name:'guava',version:'31.1-android'
-    implementation group: 'androidx.annotation', name: 'annotation', version: '1.5.0'
-    implementation group: 'org.chromium.net', name: 'cronet-api', version: "${cronetVersion}"
-    implementation group: 'org.chromium.net', name: 'cronet-embedded', version: "${cronetVersion}"
-    implementation group: 'org.chromium.net', name: 'cronet-common', version: "${cronetVersion}"
-    implementation group: 'org.chromium.net', name: 'cronet-fallback', version: "${cronetVersion}"
+    api group:'com.squareup.okhttp3',name:'okhttp',version:'3.12.13'
+    api group:'com.squareup.okio',name:'okio',version:'2.10.0'
+    api group:'com.google.guava',name:'guava',version:'31.1-android'
+    api group: 'androidx.annotation', name: 'annotation', version: '1.5.0'
+    api group: 'org.chromium.net', name: 'cronet-api', version: "${cronetVersion}"
+    api group: 'org.chromium.net', name: 'cronet-embedded', version: "${cronetVersion}"
+    api group: 'org.chromium.net', name: 'cronet-common', version: "${cronetVersion}"
+    api group: 'org.chromium.net', name: 'cronet-fallback', version: "${cronetVersion}"
 }
