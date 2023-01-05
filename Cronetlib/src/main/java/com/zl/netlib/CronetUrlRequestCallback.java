@@ -65,7 +65,6 @@ public abstract class CronetUrlRequestCallback extends UrlRequest.Callback {
         onSuccess(request, info, bytesReceived.toByteArray(), latencyTime);
     }
 
-
     @Override
     public void onFailed(UrlRequest request, UrlResponseInfo info, CronetException error) {
         Log.i(TAG, "onFailed method called.");

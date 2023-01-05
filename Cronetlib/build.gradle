@@ -14,7 +14,6 @@ android {
         versionName "1.0.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
-
         ndk {
             abiFilters("armeabi", "armeabi-v7a", "arm64-v8a", "x86", "x86_64")
         }
@@ -32,35 +31,21 @@ android {
         }
     }
 
-    sourceSets {
-        main {
-            jniLibs.srcDirs = ["libs"]
-        }
-    }
-
     android.libraryVariants.all {
         variant ->
             variant.outputs.all {
                 outputFileName = "CronetLib_${defaultConfig.versionName}_${defaultConfig.versionCode}.aar"
             }
     }
-
-    repositories {
-        flatDir {
-            dirs 'libs'
-        }
-    }
 }
 
 dependencies {
-    api fileTree(dir: 'libs', include: ['*.jar'])
     implementation group:'com.squareup.okhttp3',name:'okhttp',version:'3.12.13'
     implementation group:'com.squareup.okio',name:'okio',version:'2.10.0'
     implementation group:'com.google.guava',name:'guava',version:'31.1-android'
     implementation group: 'androidx.annotation', name: 'annotation', version: '1.5.0'
-//    implementation group: 'org.chromium.net', name: 'cronet-api', version: '108.5359.79'
-//    implementation group: 'org.chromium.net', name: 'cronet-embedded', version: '108.5359.79'
-//    implementation group: 'org.chromium.net', name: 'cronet-common', version: '108.5359.79'
-//    implementation group: 'org.chromium.net', name: 'cronet-fallback', version: '108.5359.79'
-
+    implementation group: 'org.chromium.net', name: 'cronet-api', version: '108.5359.79'
+    implementation group: 'org.chromium.net', name: 'cronet-embedded', version: '108.5359.79'
+    implementation group: 'org.chromium.net', name: 'cronet-common', version: '108.5359.79'
+    implementation group: 'org.chromium.net', name: 'cronet-fallback', version: '108.5359.79'
 }
