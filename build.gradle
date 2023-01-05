@@ -5,12 +5,14 @@ buildscript {
         minSdkVersion = 21
         targetSdkVersion = 32
         junitVersion = '4.13.2'
+        cronetVersion= '105.5195.68'
     }
     repositories {
         mavenCentral()
         google()
         maven { url "https://jitpack.io" }
     }
+
     dependencies {
         classpath 'com.android.tools.build:gradle:4.2.0'
         classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
