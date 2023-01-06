@@ -30,16 +30,16 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.appcompat:appcompat:1.5.1'
-    implementation project(path: ':Cronetlib')
-    implementation group:'com.squareup.okhttp3',name:'okhttp',version:'3.12.13'
-    implementation group:'com.squareup.okio',name:'okio',version:'2.10.0'
-    implementation group:'com.google.guava',name:'guava',version:'31.1-android'
-    implementation group: 'androidx.annotation', name: 'annotation', version: '1.5.0'
-    implementation group: 'org.chromium.net', name: 'cronet-api', version: "${cronetVersion}"
-    implementation group: 'org.chromium.net', name: 'cronet-embedded', version: "${cronetVersion}"
-    implementation group: 'org.chromium.net', name: 'cronet-common', version: "${cronetVersion}"
-    implementation group: 'org.chromium.net', name: 'cronet-fallback', version: "${cronetVersion}"
-//    api 'com.gitee.zhu260824:cronet-lib:v1.0.0'
+//    implementation project(path: ':Cronetlib')
+//    implementation group:'com.squareup.okhttp3',name:'okhttp',version:'3.12.13'
+//    implementation group:'com.squareup.okio',name:'okio',version:'2.10.0'
+//    implementation group:'com.google.guava',name:'guava',version:'31.1-android'
+//    implementation group: 'androidx.annotation', name: 'annotation', version: '1.5.0'
+//    implementation group: 'org.chromium.net', name: 'cronet-api', version: "${cronetVersion}"
+//    implementation group: 'org.chromium.net', name: 'cronet-embedded', version: "${cronetVersion}"
+//    implementation group: 'org.chromium.net', name: 'cronet-common', version: "${cronetVersion}"
+//    implementation group: 'org.chromium.net', name: 'cronet-fallback', version: "${cronetVersion}"
+    implementation 'com.gitee.zhu260824:cronet-lib:1.0.9'
     testImplementation group: 'junit', name: 'junit', version: "${junitVersion}"
     androidTestImplementation 'androidx.test.ext:junit:1.1.4'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
